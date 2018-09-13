@@ -10,24 +10,35 @@ export class GroupService {
     @InjectRepository(Group) private readonly rep: Repository<Group>,
   ) {}
 
-  setNodekeysToArray(l) {
+  setAllNodekeysToArray(l) {
     return map(i => {
-      i.nodekeys = isEmpty(i.nodekeys) ? [] : JSON.parse(i.nodekeys);
-      return i;
+      return this.setNodekysToArray(i);
     }, l);
+  }
+
+  setNodekysToArray(i) {
+    i.nodekeys = isEmpty(i.nodekeys) ? '' : JSON.parse(i.nodekeys);
+    return i;
+  }
+
+  setNodekysToString(i) {
+    i.nodekeys = isEmpty(i.nodekeys) ? '' : JSON.stringify(i.nodekeys);
+    return i;
   }
 
   async findAll(): Promise<Group[]> {
     const list = await this.rep.find();
-    return this.setNodekeysToArray(list);
+    return this.setAllNodekeysToArray(list);
   }
 
   async findOneById(i): Promise<Group> {
-    return await this.rep.findOne({ id: i });
+    const item = await this.rep.findOne({ id: i });
+    return this.setNodekysToArray(item);
   }
 
   async findByIds(ids): Promise<Group[]> {
-    return await this.rep.findByIds(ids);
+    const item = await this.rep.findByIds(ids);
+    return this.setAllNodekysToArray(item);
   }
 
   async count(where): Promise<number> {
@@ -39,7 +50,7 @@ export class GroupService {
   }
 
   async update(id, data): Promise<UpdateResult> {
-    return await this.rep.update(id, data);
+    return await this.rep.update(id, this.setNodekysToString(data));
   }
 
   async increment(i: number, col: string, num: number): Promise<void> {
