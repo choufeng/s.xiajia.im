@@ -1,0 +1,50 @@
+@host = http://localhost:3000
+## Get index
+GET {{host}}
+
+### post to login
+POST {{host}}/auth HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "choufeng",
+  "password": "123123"
+}
+
+### find one by id
+
+GET {{host}}/node/1
+
+
+### find by ids
+GET {{host}}/node/ids/1,2,3,
+
+### create a node
+POST {{host}}/node
+Content-Type: application/json
+
+{
+  "name": "logout",
+  "category": "System",
+  "nodekey": "system.logout",
+  "uri": "/logout",
+  "sort": "2"
+}
+
+### find and count
+Get {{host}}/node/count
+
+### Create a menu
+
+POST {{host}}/menu
+Content-Type: application/json
+
+{
+  "pid": 0,
+  "title": "Group",
+  "description": "a test",
+  "category": "side",
+  "uri": "/group",
+  "rule": "system.login",
+  "sort": 0
+}
