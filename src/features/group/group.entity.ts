@@ -19,7 +19,7 @@ export class Group extends BaseEntity {
   @Column({ length: 100, nullable: true })
   description: string;
 
-  @Column('text', { nullable: true })
+  @Column('text', { nullable: true, default: '' })
   nodekeys: string;
 
   @Column({ default: true })
