@@ -2,6 +2,7 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Group } from './group.entity';
 import { Repository, InsertResult, UpdateResult, DeleteResult } from 'typeorm';
+import { map, isEmpty } from 'ramda';
 
 @Injectable()
 export class GroupService {
@@ -9,8 +10,16 @@ export class GroupService {
     @InjectRepository(Group) private readonly rep: Repository<Group>,
   ) {}
 
+  setNodekeysToArray(l) {
+    return map(i => {
+      i.nodekeys = isEmpty(i.nodekeys) ? [] : JSON.parse(i.nodekeys);
+      return i;
+    }, l);
+  }
+
   async findAll(): Promise<Group[]> {
-    return await this.rep.find();
+    const list = await this.rep.find();
+    return this.setNodekeysToArray(list);
   }
 
   async findOneById(i): Promise<Group> {
