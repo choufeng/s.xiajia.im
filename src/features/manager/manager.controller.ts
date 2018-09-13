@@ -2,6 +2,7 @@ import { Controller, Get, Post, Put, Patch, Delete, Param, Body, Query } from '@
 import { ManagerService } from './manager.service';
 import { Manager } from './manager.entity';
 import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
+import { isNil } from 'ramda';
 
 @Controller('manager')
 export class ManagerController {
@@ -25,7 +26,7 @@ export class ManagerController {
 
   @Get('/count')
   count(@Query() query): Promise<number> {
-    const w = R.isNil(query.where) ? {} : JSON.parse(query.where);
+    const w = isNil(query.where) ? {} : JSON.parse(query.where);
     return this.service.count(w);
   }
 

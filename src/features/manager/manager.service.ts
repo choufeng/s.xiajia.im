@@ -34,11 +34,11 @@ export class ManagerService {
     return await this.rep.update(id, data);
   }
 
-  async increment(i: string, col: string, num: number): Promise<void> {
+  async increment(i: number, col: string, num: number): Promise<void> {
     return await this.rep.increment({id: i}, col, num);
   }
 
-  async decrement(i: string, col: string, num: number): Promise<void> {
+  async decrement(i: number, col: string, num: number): Promise<void> {
     return await this.rep.decrement({id: i}, col, num);
   }
 
