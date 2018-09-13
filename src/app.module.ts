@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule} from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
-import { PhotoController, PhotoModule, PhotoService } from './features/photo/index';
+import {
+  PhotoController,
+  PhotoModule,
+  PhotoService,
+} from './features/photo/index';
 import { AuthModule } from 'common/auth/auth.module';
 import { NodeController } from 'features/node/node.controller';
 import { NodeService } from 'features/node/node.service';

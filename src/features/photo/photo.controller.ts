@@ -1,4 +1,14 @@
-import {Get, Delete, Controller, Param, Patch, Body, Put, Post, UseGuards} from '@nestjs/common';
+import {
+  Get,
+  Delete,
+  Controller,
+  Param,
+  Patch,
+  Body,
+  Put,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { PhotoService } from './photo.service';
 import { Photo } from './photo.entity';
 import { DeleteResult, UpdateResult, InsertResult } from 'typeorm';
@@ -43,5 +53,4 @@ export class PhotoController {
   // Count(@Param('where') where): Promise<Int> {
   //   return this.service.count(where);
   // }
-
 }

@@ -6,8 +6,7 @@ import { Repository, InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 @Injectable()
 export class GroupService {
   constructor(
-    @InjectRepository(Group)
-    private readonly rep: Repository<Group>,
+    @InjectRepository(Group) private readonly rep: Repository<Group>,
   ) {}
 
   async findAll(): Promise<Group[]> {
@@ -15,7 +14,7 @@ export class GroupService {
   }
 
   async findOneById(i): Promise<Group> {
-    return await this.rep.findOne({id: i});
+    return await this.rep.findOne({ id: i });
   }
 
   async findByIds(ids): Promise<Group[]> {
@@ -35,11 +34,11 @@ export class GroupService {
   }
 
   async increment(i: number, col: string, num: number): Promise<void> {
-    return await this.rep.increment({id: i}, col, num);
+    return await this.rep.increment({ id: i }, col, num);
   }
 
   async decrement(i: number, col: string, num: number): Promise<void> {
-    return await this.rep.decrement({id: i}, col, num);
+    return await this.rep.decrement({ id: i }, col, num);
   }
 
   async delete(ids): Promise<DeleteResult> {

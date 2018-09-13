@@ -1,4 +1,13 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
 import { Group } from '../group/group.entity';
 
 @Entity()
@@ -6,13 +15,13 @@ export class Manager extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({length: 50})
+  @Column({ length: 50 })
   username: string;
 
-  @Column({length: 100})
+  @Column({ length: 100 })
   password: string;
 
-  @Column({length: 50})
+  @Column({ length: 50 })
   phone: string;
 
   @CreateDateColumn()

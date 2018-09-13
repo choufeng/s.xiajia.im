@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Param, Body, Query, Patch, Put, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  Query,
+  Patch,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { GroupService } from './group.service';
 import { Group } from './group.entity';
 import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';

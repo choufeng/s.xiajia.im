@@ -9,5 +9,4 @@ import { Module } from '@nestjs/common';
   providers: [NodeService],
   controllers: [NodeController],
 })
-
-export class NodeModule{}
+export class NodeModule {}

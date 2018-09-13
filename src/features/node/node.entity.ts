@@ -5,16 +5,16 @@ export class Node extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({length: 100})
+  @Column({ length: 100 })
   name: string;
 
-  @Column({length: 100})
+  @Column({ length: 100 })
   category: string;
 
-  @Column({length: 50})
+  @Column({ length: 50 })
   nodekey: string;
 
-  @Column({length: 100})
+  @Column({ length: 100 })
   uri: string;
 
   @Column('int')

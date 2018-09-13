@@ -10,5 +10,4 @@ import { AuthModule } from 'common/auth/auth.module';
   providers: [PhotoService],
   controllers: [PhotoController],
 })
-
-export class PhotoModule{}
+export class PhotoModule {}

@@ -5,7 +5,7 @@ export class Photo extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({length: 200})
+  @Column({ length: 200 })
   name: string;
 
   @Column('text')

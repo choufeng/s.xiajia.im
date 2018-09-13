@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly service: AuthService){}
+  constructor(private readonly service: AuthService) {}
 
   @Post()
   root(@Body() data): Promise<any> {

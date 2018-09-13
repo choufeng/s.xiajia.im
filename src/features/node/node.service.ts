@@ -7,17 +7,14 @@ import { NO_THIS_USER } from 'common/errorcode.const';
 
 @Injectable()
 export class NodeService {
-  constructor(
-    @InjectRepository(Node)
-    private readonly rep: Repository<Node>,
-  ) {}
+  constructor(@InjectRepository(Node) private readonly rep: Repository<Node>) {}
 
   async findAll(): Promise<Node[]> {
     return await this.rep.find();
   }
 
   async findOneById(i): Promise<Node> {
-    return await this.rep.findOne({id: i});
+    return await this.rep.findOne({ id: i });
   }
 
   async findByIds(ids): Promise<Node[]> {
@@ -37,11 +34,11 @@ export class NodeService {
   }
 
   async increment(i: number, col: string, num: number): Promise<void> {
-    return await this.rep.increment({id: i}, col, num);
+    return await this.rep.increment({ id: i }, col, num);
   }
 
   async decrement(i: number, col: string, num: number): Promise<void> {
-    return await this.rep.decrement({id: i}, col, num);
+    return await this.rep.decrement({ id: i }, col, num);
   }
 
   async delete(ids): Promise<DeleteResult> {

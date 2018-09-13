@@ -9,5 +9,4 @@ import { Group } from './group.entity';
   providers: [GroupService],
   controllers: [GroupController],
 })
-
-export class GroupModule{}
+export class GroupModule {}

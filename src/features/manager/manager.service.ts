@@ -6,8 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class ManagerService {
   constructor(
-    @InjectRepository(Manager)
-    private readonly rep: Repository<Manager>
+    @InjectRepository(Manager) private readonly rep: Repository<Manager>,
   ) {}
 
   async findAll(): Promise<Manager[]> {
@@ -15,7 +14,7 @@ export class ManagerService {
   }
 
   async findOneById(i): Promise<Manager> {
-    return await this.rep.findOne({id: i});
+    return await this.rep.findOne({ id: i });
   }
 
   async findByIds(ids): Promise<Manager[]> {
@@ -35,11 +34,11 @@ export class ManagerService {
   }
 
   async increment(i: number, col: string, num: number): Promise<void> {
-    return await this.rep.increment({id: i}, col, num);
+    return await this.rep.increment({ id: i }, col, num);
   }
 
   async decrement(i: number, col: string, num: number): Promise<void> {
-    return await this.rep.decrement({id: i}, col, num);
+    return await this.rep.decrement({ id: i }, col, num);
   }
 
   async delete(ids): Promise<DeleteResult> {

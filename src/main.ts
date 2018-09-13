@@ -18,10 +18,12 @@ async function bootstrap() {
   SwaggerModule.setup('docs_xj', app, document);
   app.enableCors();
   app.use(helmet());
-  app.use(rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-  }));
+  app.use(
+    rateLimit({
+      windowMs: 15 * 60 * 1000,
+      max: 100,
+    }),
+  );
   await app.listen(3000);
 }
 bootstrap();

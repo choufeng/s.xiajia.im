@@ -9,5 +9,4 @@ import { MenuController } from './menu.controller';
   providers: [MenuService],
   controllers: [MenuController],
 })
-
-export class MenuModule{}
+export class MenuModule {}

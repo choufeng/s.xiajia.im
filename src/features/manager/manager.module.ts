@@ -9,5 +9,4 @@ import { ManagerController } from './manager.controller';
   providers: [ManagerService],
   controllers: [ManagerController],
 })
-
-export class ManagerModule{}
+export class ManagerModule {}

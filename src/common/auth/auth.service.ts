@@ -6,10 +6,14 @@ import { isNil, not, equals } from 'ramda';
 import { NO_THIS_USER, PASSWORD_IS_WRONG } from '../errorcode.const';
 import { SECRET_KEY } from 'config';
 import * as jwt from 'jsonwebtoken';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+  ) {}
 
   async validateUser(payload: JwtPayload): Promise<any> {
     return {};
@@ -28,13 +32,14 @@ export class AuthService {
     // .where('manager.username = :username', {username: data.username})
     // .getOne();
     // 这里应该对用户名，密码进行判断，对不同的结果给不同的报错信息提示
-    const m = await Manager.findOne({username: data.username});
+    const m = await Manager.findOne({ relations: ['group'], where: { username: data.username } });
     this.isNotHaveThisUser(m);
     this.isPasswordWrong(m.password, data.password);
     const t = this.getToken(m);
     return {
       token: t,
       name: m.username,
+      nodes: m.group.nodekeys,
     };
   }
 

@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Put, Patch, Delete, Param, Body, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Patch,
+  Delete,
+  Param,
+  Body,
+  Query,
+} from '@nestjs/common';
 import { ManagerService } from './manager.service';
 import { Manager } from './manager.entity';
 import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
@@ -6,7 +16,7 @@ import { isNil } from 'ramda';
 
 @Controller('manager')
 export class ManagerController {
-  constructor(private readonly service: ManagerService){}
+  constructor(private readonly service: ManagerService) {}
 
   @Get()
   findAll(): Promise<Manager[]> {
