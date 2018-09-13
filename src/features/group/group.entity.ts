@@ -16,16 +16,16 @@ export class Group extends BaseEntity {
   @Column({ length: 100 })
   name: string;
 
-  @Column({ length: 100 })
+  @Column({ length: 100, nullable: true })
   description: string;
 
-  @Column('text')
+  @Column('text', { nullable: true })
   nodekeys: string;
 
-  @Column()
+  @Column({ default: true })
   status: boolean;
 
-  @Column('int')
+  @Column('int', { default: 0 })
   sort: number;
 
   @CreateDateColumn()
