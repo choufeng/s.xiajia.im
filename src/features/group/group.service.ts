@@ -37,8 +37,8 @@ export class GroupService {
   }
 
   async findByIds(ids): Promise<Group[]> {
-    const item = await this.rep.findByIds(ids);
-    return this.setAllNodekysToArray(item);
+    const list = await this.rep.findByIds(ids);
+    return this.setAllNodekeysToArray(list);
   }
 
   async count(where): Promise<number> {
