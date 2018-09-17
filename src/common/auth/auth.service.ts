@@ -4,10 +4,11 @@ import { JwtService } from '@nestjs/jwt';
 import { Manager } from 'features/manager/manager.entity';
 import { isNil, not, equals } from 'ramda';
 import { NO_THIS_USER, PASSWORD_IS_WRONG } from '../errorcode.const';
-import { SECRET_KEY } from 'config';
 import * as jwt from 'jsonwebtoken';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { log } from 'util';
+import { SECRET_KEY } from 'config';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,11 @@ export class AuthService {
     return {};
   }
 
-  async login(data): Promise<any> {
+  encodePassword(p: string) {
+    return p;
+  }
+
+  async login(userName, passWord): Promise<any> {
     // 下面是三男中数据库读写的处理方式， 第一二中方法对应需要entity中 extends baseEntity, 第三种采用更为灵活的方式.
     // No.1 with Base
     // return Manager.findOne({username: data.username});
@@ -32,9 +37,10 @@ export class AuthService {
     // .where('manager.username = :username', {username: data.username})
     // .getOne();
     // 这里应该对用户名，密码进行判断，对不同的结果给不同的报错信息提示
-    const m = await Manager.findOne({ relations: ['group'], where: { username: data.username } });
+    log(passWord);
+    const m = await Manager.findOne({ relations: ['group'], where: { username: userName } });
     this.isNotHaveThisUser(m);
-    this.isPasswordWrong(m.password, data.password);
+    this.isPasswordWrong(m.password, passWord);
     const t = this.getToken(m);
     return {
       token: t,
@@ -45,7 +51,7 @@ export class AuthService {
 
   private isNotHaveThisUser(m) {
     if (isNil(m)) {
-      throw new HttpException(NO_THIS_USER, HttpStatus.BAD_GATEWAY);
+      throw new HttpException(NO_THIS_USER, HttpStatus.BAD_REQUEST);
     }
   }
 

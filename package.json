@@ -24,6 +24,7 @@
     "@nestjs/swagger": "^2.5.1",
     "@nestjs/typeorm": "^5.2.0",
     "cors": "^2.8.4",
+    "crypto": "^1.0.1",
     "csurf": "^1.9.0",
     "express-rate-limit": "^3.1.1",
     "fastify-formbody": "^2.0.0",
