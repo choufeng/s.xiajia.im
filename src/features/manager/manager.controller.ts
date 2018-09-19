@@ -13,6 +13,7 @@ import { ManagerService } from './manager.service';
 import { Manager } from './manager.entity';
 import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 import { isNil } from 'ramda';
+import { EncodePasswordPipe } from 'common/auth/encode-password.pipe';
 
 @Controller('manager')
 export class ManagerController {
@@ -64,5 +65,10 @@ export class ManagerController {
   delete(@Param('ids') ids): Promise<DeleteResult> {
     const data = ids.split(',');
     return this.service.delete(data);
+  }
+
+  @Patch('/reset-password/:id')
+  resetPassword(@Param('id') id, @Body('password', new EncodePasswordPipe()) password): Promise<any> {
+    return this.service.resetPassword(id, password);
   }
 }

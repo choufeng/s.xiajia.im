@@ -5,8 +5,6 @@ import { Manager } from 'features/manager/manager.entity';
 import { isNil, not, equals } from 'ramda';
 import { NO_THIS_USER, PASSWORD_IS_WRONG } from '../errorcode.const';
 import * as jwt from 'jsonwebtoken';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
 import { log } from 'util';
 import { SECRET_KEY } from 'config';
 
@@ -18,10 +16,6 @@ export class AuthService {
 
   async validateUser(payload: JwtPayload): Promise<any> {
     return {};
-  }
-
-  encodePassword(p: string) {
-    return p;
   }
 
   async login(userName, passWord): Promise<any> {

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository, InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 import { Manager } from './manager.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { log } from 'util';
 
 @Injectable()
 export class ManagerService {
@@ -10,7 +11,7 @@ export class ManagerService {
   ) {}
 
   async findAll(): Promise<Manager[]> {
-    return await this.rep.find();
+    return await this.rep.find({ relations: ['group'] });
   }
 
   async findOneById(i): Promise<Manager> {
@@ -43,5 +44,11 @@ export class ManagerService {
 
   async delete(ids): Promise<DeleteResult> {
     return await this.rep.delete(ids);
+  }
+
+  async resetPassword(id, p): Promise<string> {
+    // 重置密码
+    const result = await this.rep.update(id, {password: p});
+    return p;
   }
 }
