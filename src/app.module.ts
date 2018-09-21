@@ -21,6 +21,9 @@ import { MenuService } from 'features/menu/menu.service';
 import { ManagerModule } from 'features/manager/manager.module';
 import { ManagerController } from 'features/manager/manager.controller';
 import { ManagerService } from 'features/manager/manager.service';
+import { CategoryModule } from 'features/category/category.module';
+import { CategoryController } from 'features/category/category.controller';
+import { CategoryService } from 'features/category/category.service';
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
@@ -30,6 +33,7 @@ import { ManagerService } from 'features/manager/manager.service';
     GroupModule,
     MenuModule,
     ManagerModule,
+    CategoryModule,
   ],
   controllers: [
     AppController,
@@ -38,6 +42,7 @@ import { ManagerService } from 'features/manager/manager.service';
     GroupController,
     MenuController,
     ManagerController,
+    CategoryController,
   ],
   providers: [
     AppService,
@@ -46,6 +51,7 @@ import { ManagerService } from 'features/manager/manager.service';
     GroupService,
     MenuService,
     ManagerService,
+    CategoryService,
   ],
 })
 export class AppModule {
