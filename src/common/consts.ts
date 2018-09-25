@@ -1,0 +1,1 @@
+export const REMOVE_TREE_NAME = '已删除分类';

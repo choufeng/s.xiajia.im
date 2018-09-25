@@ -12,6 +12,11 @@ export class CategoryController {
     return this.service.getAllTrees();
   }
 
+  @Get('/roots')
+  getRoots(): Promise<any> {
+    return this.service.getRoots();
+  }
+
   @Get('/:id')
   getNodeById(@Param('id') id): Promise<Category> {
     return this.service.getNodeById(id);

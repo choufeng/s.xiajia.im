@@ -2,8 +2,10 @@ import { Injectable, HttpException, HttpCode, HttpStatus } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from './category.entity';
 import { getManager, Repository, TreeRepository, UpdateResult, DeleteResult } from 'typeorm';
-import { NO_THIS_NODE } from 'common/errorcode.const';
+import { NO_THIS_NODE, NO_REMOVE_CATEGORY } from 'common/errorcode.const';
 import { isNil } from 'ramda';
+import { REMOVE_TREE_NAME } from 'common/consts';
+import { log } from 'util';
 
 @Injectable()
 export class CategoryService {
@@ -14,6 +16,10 @@ export class CategoryService {
 
   async getAllTrees(): Promise<any> {
     return this.repTree.findTrees();
+  }
+
+  async getRoots(): Promise<Category[]> {
+    return this.repTree.findRoots();
   }
 
   async getNodeById(cid: number): Promise<Category> {
@@ -70,13 +76,17 @@ export class CategoryService {
     return await this.repTree.update(cid, data);
   }
 
-  async delete(cid): Promise<DeleteResult> {
-    // 3步， 1, 检查是否有子类， 2. 删除
-    const data = await this.getChildrenById(cid);
-    if (data.length > 1) {
-      throw new HttpException('包含了子节点', HttpStatus.BAD_REQUEST);
+  async delete(cid): Promise<any> {
+    // 设计目标为把节点移动到一个专用的移除树
+    // 1. 找出移除树`已删除`
+    // 2. 把目标树移动到该节点下
+    const removeTree = await this.rep.findOne({name: REMOVE_TREE_NAME});
+    if (isNil(removeTree)) {
+      throw new HttpException(`${NO_REMOVE_CATEGORY}:${REMOVE_TREE_NAME}`, HttpStatus.BAD_REQUEST);
     }
-    return await this.rep.delete(cid); // TODO 删除方法不合理
+    const node = await this.getNodeById(cid);
+    node.parent = removeTree;
+    return await this.repTree.update(cid, node);
   }
 
 }

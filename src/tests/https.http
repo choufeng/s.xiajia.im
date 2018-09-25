@@ -1,0 +1,16 @@
+#API TEST
+
+### get all root category
+GET http://localhost:3000/category/roots
+
+### delete a category
+
+DELETE http://localhost:3000/category/14
+
+### create a category
+POST http://localhost:3000/category
+Content-Type: application/json
+
+{
+  "name": "已删除分类"
+}
