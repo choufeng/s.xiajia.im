@@ -52,18 +52,4 @@ export class CategoryController {
     return this.service.delete(id);
   }
 
-  // @Post('/init')
-  // init(): Promise<any> {
-  //   return this.service.init();
-  // }
-
-  // @Get('/trees')
-  // getTrees(): Promise<any> {
-  //   return this.service.getTrees();
-  // }
-
-  // @Post('/test')
-  // test(): Promise<any> {
-  //   return this.service.test();
-  // }
 }

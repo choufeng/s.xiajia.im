@@ -13,6 +13,9 @@ export class Category {
   @Column()
   description: string;
 
+  @Column()
+  sort: number;
+
   @TreeChildren()
   children: Category[];
 

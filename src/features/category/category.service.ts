@@ -71,7 +71,12 @@ export class CategoryService {
   }
 
   async delete(cid): Promise<DeleteResult> {
-    return await this.repTree.delete(cid);
+    // 3步， 1, 检查是否有子类， 2. 删除
+    const data = await this.getChildrenById(cid);
+    if (data.length > 1) {
+      throw new HttpException('包含了子节点', HttpStatus.BAD_REQUEST);
+    }
+    return await this.rep.delete(cid); // TODO 删除方法不合理
   }
 
 }
