@@ -72,8 +72,14 @@ export class CategoryService {
     return await this.rep.save(category);
   }
 
-  async update(cid, data): Promise<UpdateResult> {
-    return await this.repTree.update(cid, data);
+  async update(cid, data): Promise<Category> {
+    const category = await this.getNodeById(cid);
+    category.name = data.name;
+    category.description = data.description;
+    if (data.parent) {
+      category.parent = await this.getNodeById(data.parent);
+    }
+    return await this.rep.save(category);
   }
 
   async delete(cid): Promise<any> {

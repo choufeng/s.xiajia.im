@@ -53,7 +53,7 @@ export class CategoryController {
   }
 
   @Put('/:id')
-  update(@Body() data, @Param('id') id): Promise<UpdateResult> {
+  update(@Body() data, @Param('id') id): Promise<Category> {
     return this.service.update(id, data);
   }
 
