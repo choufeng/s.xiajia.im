@@ -12,5 +12,6 @@ POST http://localhost:3000/category
 Content-Type: application/json
 
 {
-  "name": "已删除分类"
+  "name": "言情小说",
+  "parent": 20
 }

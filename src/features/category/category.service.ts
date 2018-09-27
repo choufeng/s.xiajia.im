@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from './category.entity';
 import { getManager, Repository, TreeRepository, UpdateResult, DeleteResult } from 'typeorm';
 import { NO_THIS_NODE, NO_REMOVE_CATEGORY } from 'common/errorcode.const';
-import { isNil } from 'ramda';
+import { isNil, not } from 'ramda';
 import { REMOVE_TREE_NAME } from 'common/consts';
 import { log } from 'util';
 
@@ -89,4 +89,24 @@ export class CategoryService {
     return await this.repTree.update(cid, node);
   }
 
+  async getRemoveCategory(): Promise<Category> {
+    const node = await this.rep.findOne({name: REMOVE_TREE_NAME});
+    if (isNil(node)) {
+      throw new HttpException(`${NO_THIS_NODE}: ${REMOVE_TREE_NAME}`, HttpStatus.BAD_REQUEST);
+    }
+    return node;
+  }
+
+  async initDatabase(): Promise<any> {
+    // 检查是否有这个分类
+    const hasOne = this.rep.findOne({name: REMOVE_TREE_NAME});
+    if (not(isNil(hasOne))) {
+      throw new HttpException(`已经初始化过, 无需再次执行!`, HttpStatus.BAD_REQUEST);
+    }
+    // 存入标准的已删除分类
+    const category = new Category();
+    category.name = REMOVE_TREE_NAME;
+    category.description = '这里负责保留所有从其他分类移除的分类';
+    return this.rep.save(category);
+  }
 }

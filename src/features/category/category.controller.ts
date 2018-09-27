@@ -12,6 +12,11 @@ export class CategoryController {
     return this.service.getAllTrees();
   }
 
+  @Get('/remove-root')
+  getRemoveRoot(): Promise<Category> {
+    return this.service.getRemoveCategory();
+  }
+
   @Get('/roots')
   getRoots(): Promise<any> {
     return this.service.getRoots();
@@ -55,6 +60,11 @@ export class CategoryController {
   @Delete('/:id')
   delete(@Param('id') id): Promise<DeleteResult> {
     return this.service.delete(id);
+  }
+
+  @Post('/init-db')
+  initDatabase(): Promise<any> {
+    return this.service.initDatabase();
   }
 
 }
