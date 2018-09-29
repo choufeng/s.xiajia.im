@@ -66,7 +66,9 @@ export class CategoryService {
     const category = new Category();
     category.name = data.name;
     category.description = data.description;
-    if (data.parent) {
+    if (data.parent === 0) {
+      category.parent = null;
+    } else {
       category.parent = await this.getNodeById(data.parent);
     }
     return await this.rep.save(category);
@@ -76,7 +78,9 @@ export class CategoryService {
     const category = await this.getNodeById(cid);
     category.name = data.name;
     category.description = data.description;
-    if (data.parent) {
+    if (data.parent === 0) {
+      category.parent = null;
+    } else if (data.parent) {
       category.parent = await this.getNodeById(data.parent);
     }
     return await this.rep.save(category);
@@ -92,7 +96,7 @@ export class CategoryService {
     }
     const node = await this.getNodeById(cid);
     node.parent = removeTree;
-    return await this.repTree.update(cid, node);
+    return await this.rep.save(node);
   }
 
   async getRemoveCategory(): Promise<Category> {
@@ -105,7 +109,7 @@ export class CategoryService {
 
   async initDatabase(): Promise<any> {
     // 检查是否有这个分类
-    const hasOne = this.rep.findOne({name: REMOVE_TREE_NAME});
+    const hasOne = await this.rep.findOne({name: REMOVE_TREE_NAME});
     if (not(isNil(hasOne))) {
       throw new HttpException(`已经初始化过, 无需再次执行!`, HttpStatus.BAD_REQUEST);
     }

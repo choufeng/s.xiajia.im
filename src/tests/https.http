@@ -1,7 +1,11 @@
 #API TEST
 
 ### get all root category
-GET http://localhost:3000/category/18
+GET http://localhost:3000/category/roots
+
+
+### get children category
+GET http://localhost:3000/category/2/children-tree
 
 ### delete a category
 
@@ -12,8 +16,8 @@ POST http://localhost:3000/category
 Content-Type: application/json
 
 {
-  "name": "言情小说",
-  "parent": 20
+  "name": "一度",
+  "parent": 2
 }
 
 ### Init DB
@@ -24,9 +28,9 @@ Content-Type: application/json
 Get http://localhost:3000/category/remove-root
 
 ### udpate a node
-PUT http://localhost:3000/category/21
+PUT http://localhost:3000/category/5
 Content-Type: application/json
 
 {
-  "parent": 20
+  "parent": 1
 }
