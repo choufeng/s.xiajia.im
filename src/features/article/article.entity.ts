@@ -16,6 +16,9 @@ export class Article {
   @Column('text')
   content: string;
 
+  @Column({default: 0})
+  status: number;
+
   @CreateDateColumn()
   created: Date;
 
