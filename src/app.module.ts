@@ -24,6 +24,9 @@ import { ManagerService } from 'features/manager/manager.service';
 import { CategoryModule } from 'features/category/category.module';
 import { CategoryController } from 'features/category/category.controller';
 import { CategoryService } from 'features/category/category.service';
+import { ArticleModule } from 'features/article/article.module';
+import { ArticleController } from 'features/article/article.controller';
+import { ArticleService } from 'features/article/article.service';
 @Module({
   imports: [
     TypeOrmModule.forRoot(),
@@ -34,6 +37,7 @@ import { CategoryService } from 'features/category/category.service';
     MenuModule,
     ManagerModule,
     CategoryModule,
+    ArticleModule,
   ],
   controllers: [
     AppController,
@@ -43,6 +47,7 @@ import { CategoryService } from 'features/category/category.service';
     MenuController,
     ManagerController,
     CategoryController,
+    ArticleController,
   ],
   providers: [
     AppService,
@@ -52,6 +57,7 @@ import { CategoryService } from 'features/category/category.service';
     MenuService,
     ManagerService,
     CategoryService,
+    ArticleService,
   ],
 })
 export class AppModule {

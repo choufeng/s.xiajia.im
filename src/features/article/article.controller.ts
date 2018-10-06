@@ -1,28 +1,17 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Param,
-  Body,
-  Query,
-  Patch,
-  Put,
-  Delete,
-} from '@nestjs/common';
-import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
+import { Controller, Get, Query, Param, Body, Post, Put, Patch, Delete } from '@nestjs/common';
+import { ArticleService } from './article.service';
+import { Article } from './article.entity';
 import * as R from 'ramda';
-import { log } from 'util';
-import { JsonWebTokenError } from 'jsonwebtoken';
-import { MenuService } from './menu.service';
-import { Menu } from './menu.entity';
+import { InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 
-@Controller('menu')
-export class MenuController {
-  constructor(private readonly service: MenuService) {}
+@Controller('article')
+export class ArticleController {
+  constructor(private readonly service: ArticleService) {}
 
   @Get()
-  findAll(): Promise<Menu[]> {
-    return this.service.findAll();
+  findAll(@Query() query): Promise<Article[]> {
+    const w = R.isNil(query.where) ? {} : JSON.parse(query.where);
+    return this.service.findAll(w);
   }
 
   @Get('/count')
@@ -32,12 +21,12 @@ export class MenuController {
   }
 
   @Get('/id/:id')
-  findOneById(@Param('id') id: number): Promise<Menu> {
+  findOneById(@Param('id') id: string): Promise<Article> {
     return this.service.findOneById(id);
   }
 
   @Get('/ids/:ids')
-  findByIds(@Param('ids') ids: string): Promise<Menu[]> {
+  findByIds(@Param('ids') ids: string): Promise<Article[]> {
     const idArray = ids.split(',');
     return this.service.findByIds(idArray);
   }

@@ -68,7 +68,10 @@ export class ManagerController {
   }
 
   @Patch('/reset-password/:id')
-  resetPassword(@Param('id') id, @Body('password', new EncodePasswordPipe()) password): Promise<any> {
+  resetPassword(
+    @Param('id') id,
+    @Body('password', new EncodePasswordPipe()) password,
+  ): Promise<any> {
     return this.service.resetPassword(id, password);
   }
 }

@@ -10,9 +10,7 @@ import { SECRET_KEY } from 'config';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private readonly jwtService: JwtService,
-  ) {}
+  constructor(private readonly jwtService: JwtService) {}
 
   async validateUser(payload: JwtPayload): Promise<any> {
     return {};
@@ -32,7 +30,10 @@ export class AuthService {
     // .getOne();
     // 这里应该对用户名，密码进行判断，对不同的结果给不同的报错信息提示
     log(passWord);
-    const m = await Manager.findOne({ relations: ['group'], where: { username: userName } });
+    const m = await Manager.findOne({
+      relations: ['group'],
+      where: { username: userName },
+    });
     this.isNotHaveThisUser(m);
     this.isPasswordWrong(m.password, passWord);
     const t = this.getToken(m);

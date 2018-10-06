@@ -12,7 +12,17 @@
     "sourceMap": true,
     "allowJs": true,
     "outDir": "./dist",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "lib": [
+      "es7",
+      "esnext",
+      "esnext.asynciterable",
+      "esnext.symbol",
+      "esnext.array",
+      "esnext.intl",
+      "dom.iterable",
+      "dom"
+    ]
   },
   "include": [
     "src/**/*"
@@ -20,5 +30,5 @@
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
-  ]
+  ],
 }

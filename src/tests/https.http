@@ -34,3 +34,8 @@ Content-Type: application/json
 {
   "parent": 1
 }
+
+## Article
+
+### get All article
+GET http://localhost:3000/article/

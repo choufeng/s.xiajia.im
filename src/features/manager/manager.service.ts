@@ -48,7 +48,7 @@ export class ManagerService {
 
   async resetPassword(id, p): Promise<string> {
     // 重置密码
-    const result = await this.rep.update(id, {password: p});
+    const result = await this.rep.update(id, { password: p });
     return p;
   }
 }

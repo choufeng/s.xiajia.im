@@ -1,10 +1,18 @@
-import { Entity, PrimaryGeneratedColumn, Column, TreeChildren, TreeParent, Tree, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  TreeChildren,
+  TreeParent,
+  Tree,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 
 @Entity()
 // @Tree('closure-table')
 @Tree('nested-set')
 export class Category {
-
   @PrimaryGeneratedColumn()
   id: number;
 

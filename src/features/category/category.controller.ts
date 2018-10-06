@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Get, Param, Put, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { Category } from './category.entity';
 import { UpdateResult, DeleteResult } from 'typeorm';
@@ -66,5 +74,4 @@ export class CategoryController {
   initDatabase(): Promise<any> {
     return this.service.initDatabase();
   }
-
 }
