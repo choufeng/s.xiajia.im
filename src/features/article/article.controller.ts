@@ -11,7 +11,9 @@ export class ArticleController {
   @Get()
   findAll(@Query() query): Promise<Article[]> {
     const w = R.isNil(query.where) ? {} : JSON.parse(query.where);
-    return this.service.findAll(w);
+    const limit = R.isNil(query.limit) ? 15 : query.limit;
+    const offset = R.isNil(query.page) ? 0 : R.multiply(query.page, limit);
+    return this.service.findAll(w, limit, offset);
   }
 
   @Get('/count')

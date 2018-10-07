@@ -7,8 +7,12 @@ import { Repository, InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 export class ArticleService {
   constructor(@InjectRepository(Article) private readonly rep: Repository<Article>){}
 
-  async findAll(where): Promise<Article[]> {
-    return await this.rep.find(where);
+  async findAll(where, limit, offset): Promise<Article[]> {
+    return await this.rep.find({
+      where,
+      take: limit,
+      skip: offset,
+    });
   }
 
   async findOneById(aid: string): Promise<Article> {
