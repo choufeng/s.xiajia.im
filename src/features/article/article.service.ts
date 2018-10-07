@@ -12,6 +12,9 @@ export class ArticleService {
       where,
       take: limit,
       skip: offset,
+      order: {
+        id: 'DESC',
+      },
     });
   }
 

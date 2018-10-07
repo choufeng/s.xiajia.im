@@ -38,4 +38,4 @@ Content-Type: application/json
 ## Article
 
 ### get All article
-GET http://localhost:3000/article/
+GET http://localhost:3000/article/?page=0&limit=1
