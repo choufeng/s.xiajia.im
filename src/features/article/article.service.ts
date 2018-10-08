@@ -15,6 +15,7 @@ export class ArticleService {
       order: {
         id: 'DESC',
       },
+      relations: ['categorys'],
     });
   }
 
