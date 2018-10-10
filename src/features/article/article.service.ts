@@ -3,10 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from './article.entity';
 import { Repository, InsertResult, UpdateResult, DeleteResult } from 'typeorm';
 import { log } from 'util';
+import { Category } from '../category/category.entity';
+import { assoc } from 'ramda';
 
 @Injectable()
 export class ArticleService {
-  constructor(@InjectRepository(Article) private readonly rep: Repository<Article>){}
+  constructor(
+    @InjectRepository(Article) private readonly rep: Repository<Article>,
+    @InjectRepository(Article) private readonly categoryRep: Repository<Category>,
+  ){}
 
   async findAll(where, limit, offset): Promise<Article[]> {
     return await this.rep.find({
@@ -34,8 +39,8 @@ export class ArticleService {
   }
 
   async create(data): Promise<InsertResult> {
-    log(data);
-    return await this.rep.save(data);
+    const list = await this.categoryRep.findByIds(data.categorys);
+    return await this.rep.save(assoc('categorys', list, data));
   }
 
   async update(id, data): Promise<UpdateResult> {
