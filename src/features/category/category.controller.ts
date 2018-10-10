@@ -35,6 +35,9 @@ export class CategoryController {
     return this.service.getNodeById(id);
   }
 
+  /**
+   * 在nest-ed模式下，这个是无效的
+   */
   @Get('/:id/children')
   getChildrenById(@Param('id') id): Promise<Category[]> {
     return this.service.getChildrenById(id);

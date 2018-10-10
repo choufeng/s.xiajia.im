@@ -45,6 +45,9 @@ export class CategoryService {
     return node;
   }
 
+  /**
+   * 在nest-ed模式下，这个是无效的
+   */
   async getChildrenById(cid: number): Promise<Category[]> {
     const node = await this.getNodeById(cid);
     if (isNil(node)) {
