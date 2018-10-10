@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Article } from './article.entity';
 import { Repository, InsertResult, UpdateResult, DeleteResult } from 'typeorm';
+import { log } from 'util';
 
 @Injectable()
 export class ArticleService {
@@ -14,6 +15,7 @@ export class ArticleService {
       skip: offset,
       order: {
         id: 'DESC',
+        title: 'ASC',
       },
       relations: ['categorys'],
     });
@@ -32,7 +34,8 @@ export class ArticleService {
   }
 
   async create(data): Promise<InsertResult> {
-    return await this.rep.insert(data);
+    log(data);
+    return await this.rep.save(data);
   }
 
   async update(id, data): Promise<UpdateResult> {
