@@ -44,7 +44,13 @@ export class ArticleService {
   }
 
   async update(id, data): Promise<UpdateResult> {
-    return await this.rep.update(id, data);
+    const list = await this.categoryRep.findByIds(data.categorys);
+    return await this.rep.save(assoc('categorys', list, data));
+  }
+
+  async save(data): Promise<Article> {
+    const list = await this.categoryRep.findByIds(data.categorys);
+    return await this.rep.save(assoc('categorys', list, data));
   }
 
   async increment(i: string, col: string, num: number): Promise<void> {

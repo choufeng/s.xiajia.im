@@ -34,13 +34,13 @@ export class ArticleController {
   }
 
   @Post()
-  create(@Body() data): Promise<InsertResult> {
-    return this.service.create(data);
+  create(@Body() data): Promise<Article> {
+    return this.service.save(data);
   }
 
   @Put('/:id')
-  patch(@Body() data, @Param('id') id): Promise<UpdateResult> {
-    return this.service.update(id, data);
+  patch(@Body() data, @Param('id') id): Promise<Article> {
+    return this.service.save(data);
   }
 
   @Patch('/increment/:id/:column/:num')
